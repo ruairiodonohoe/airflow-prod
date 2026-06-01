@@ -1,0 +1,17 @@
+x-airflow-common: &airflow-common-override
+  environment:
+    AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
+
+services:
+  airflow-apiserver:
+    <<: *airflow-common-override
+  airflow-scheduler:
+    <<: *airflow-common-override
+  airflow-dag-processor:
+    <<: *airflow-common-override
+  airflow-worker:
+    <<: *airflow-common-override
+  airflow-triggerer:
+    <<: *airflow-common-override
+  airflow-init:
+    <<: *airflow-common-override

@@ -1,0 +1,18 @@
+# --- Secrets & Environment ---
+.env
+
+# --- Astro/Local Dev artifacts ---
+.astro/
+
+# --- Airflow/Docker runtime artifacts ---
+logs/
+plugins/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.ipynb_checkpoints
+
+# --- OS System files ---
+.DS_Store
+Thumbs.db
