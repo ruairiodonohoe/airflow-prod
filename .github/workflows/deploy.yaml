@@ -1,0 +1,24 @@
+name: Deploy DAGs to Production
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+
+      - name: Sync DAGs and Restart
+        run: |
+          # 1. Go to the folder where your code lives on the server
+          cd /opt/airflow-prod
+          
+          # 2. Pull the latest updates
+          git pull origin main
+          
+          # 3. (Optional) If you have a custom container setup, 
+          # you might need to restart or refresh here.
+          # For most Airflow setups, just pulling the file is enough 
+          # as the scheduler detects new DAGs automatically.
