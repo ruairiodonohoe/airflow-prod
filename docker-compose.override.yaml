@@ -9,6 +9,8 @@ services:
     <<: *airflow-common-override
   airflow-dag-processor:
     <<: *airflow-common-override
+    environment:
+      AIRFLOW__CORE__DAG_DIR_LIST_INTERVAL: 60
   airflow-worker:
     <<: *airflow-common-override
   airflow-triggerer:
