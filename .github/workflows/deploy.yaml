@@ -9,16 +9,21 @@ jobs:
   deploy:
     runs-on: self-hosted
     steps:
-
       - name: Sync DAGs and Restart
         run: |
-          # 1. Go to the folder where your code lives on the server
           cd /opt/airflow-prod
           
-          # 2. Pull the latest updates
-          git pull origin main
+          # 1. Fetch and Reset: Discard local changes, match repo exactly
+          git fetch origin main
+          git reset --hard origin/main
           
-          # 3. (Optional) If you have a custom container setup, 
-          # you might need to restart or refresh here.
-          # For most Airflow setups, just pulling the file is enough 
-          # as the scheduler detects new DAGs automatically.
+          # 2. Rebuild only if necessary: This is fast if no changes occurred
+          # If you update requirements.txt or Dockerfile, this ensures changes apply
+          docker compose build
+          
+          # 3. Restart services: This picks up new DAG files and config changes
+          # without wiping your database (volumes).
+          docker compose up -d
+
+          # 4. Cleanup: Removes unused images to save disk space
+          docker image prune -f
