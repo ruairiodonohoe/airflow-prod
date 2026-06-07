@@ -1,0 +1,51 @@
+companies:
+    type: pandas.CSVDataset
+    filepath: s3://spaceflights/01_raw/companies.csv
+    credentials:
+        anon: true
+
+reviews:
+    type: pandas.CSVDataset
+    filepath: s3://spaceflights/01_raw/reviews.csv
+    credentials:
+        anon: true
+
+    
+shuttles:
+    type: pandas.ExcelDataset
+    filepath: s3://spaceflights/01_raw/shuttles.xlsx
+    load_args:
+        engine: openpyxl
+    credentials:
+        anon: true
+
+preprocessed_companies:
+    type: pandas.ParquetDataset
+    filepath: s3://spaceflights/02_intermediate/preprocess_companies.pq
+    credentials:
+        anon: true
+
+preprocessed_shuttles:
+    type: pandas.ParquetDataset
+    filepath: s3://spaceflights/02_intermediate/preprocess_shuttles.pq
+    credentials:
+        anon: true
+
+model_input_table:
+    type: pandas.ParquetDataset
+    filepath: s3://spaceflights/03_primary/model_input_table.pq
+    credentials:
+        anon: true
+
+"{subtype}_modelling_pipeline.regressor":
+    type: pickle.PickleDataset
+    filepath: s3://spaceflights/06_models/regressor_{subtype}.pkl
+    versioned: true
+    credentials:
+        anon: true
+
+"{base_dataset}":
+    type: pandas.CSVDataset
+    filepath: s3://spaceflights/02_intermediate/{base_dataset}.csv
+    credentials:
+        anon: true
