@@ -21,12 +21,12 @@ jobs:
           
           # 2. Rebuild only if necessary: This is fast if no changes occurred
           # If you update requirements.txt or Dockerfile, this ensures changes apply
-          # docker compose build
+          docker compose build
           
           # 3. Restart services: This picks up new DAG files and config changes
           # without wiping your database (volumes).
-          # docker compose up -d
-          docker compose up -d --build
+          docker compose up -d
+          # docker compose up -d --build
 
           # 4. Cleanup: Removes unused images to save disk space
           docker image prune -f
