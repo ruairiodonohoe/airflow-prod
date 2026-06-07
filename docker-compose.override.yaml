@@ -1,13 +1,9 @@
 x-airflow-common: &airflow-common-override
-  build: 
-    context: .
-    dockerfile: Dockerfile
   environment:
     AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
   extra_hosts:
     - "host.docker.internal:host-gateway"
-  volumes:
-    - ./projects:/opt/airflow/projects # Add this line to the anchor
+
 
 services:
   airflow-apiserver:
