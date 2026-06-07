@@ -9,8 +9,10 @@ jobs:
   deploy:
     runs-on: self-hosted
     steps:
+
       - name: Sync DAGs and Restart
         run: |
+          # 1. Go to the folder where your code lives on the server
           cd /opt/airflow-prod
           
           # 1. Fetch and Reset: Discard local changes, match repo exactly
