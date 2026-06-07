@@ -1,4 +1,7 @@
 x-airflow-common: &airflow-common-override
+  build: 
+    context: .
+    dockerfile: Dockerfile
   environment:
     AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
   extra_hosts:
